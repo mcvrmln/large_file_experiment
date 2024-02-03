@@ -1,0 +1,11 @@
+name: large_file_experiment
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pyarrow
+  - pandas
+  - pyyaml
+  - pip
+  - pip:
+    - "snowflake-connector-python[secure-local-storage,pandas]"
