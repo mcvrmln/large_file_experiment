@@ -1,21 +1,27 @@
 file:
-  records: 10_000
+  records: 15
   fields:
-    - field:
+  - field:
+      type: date
+      length: 8
+  - field:
       type: string
       length: 10
-    - field:
+  - field:
       type: string
       length: 25
-    - field: 
+  - field: 
       type: integer
       length: 10
-    - field:
+  - field:
       type: date
-      length: 10
+      length: 8
 test:
   records: 10
   fields:
-    - field:
+  - field: 
+      type: integer
+      length: 4
+  - field:
       type: string
       length: 100

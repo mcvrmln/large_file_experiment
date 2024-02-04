@@ -16,8 +16,11 @@ def generate_large_file():
     with open('./instructions.yml') as f:
         instructions = yaml.safe_load(f)
     
-    filename = helpers.generate_filename('TODO')
-    print(list(instructions.keys()))
+    # print(len(instructions['file']['fields']))
+
+    for file in instructions.keys():
+        filename = helpers.generate_filename(file)
+        helpers.generate_file(filename, instructions[file]['records'], instructions[file]['fields'])
 
 
 def process_large_file():
