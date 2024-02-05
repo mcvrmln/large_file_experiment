@@ -3,7 +3,8 @@
 Steps to execute
 
 - [x] Create a large fixed record lenght file (> 2 Gb)
-- [] Process this file (split in columns and chunks (100 - 250 Mb))
+- [x] Process this file (split in columns)
+- [] Split file in chunks (100 - 250 Mb))
 - [] Validate each record
 - [] Put it in Snowflake
 - [] Create Snowpipe
@@ -13,3 +14,6 @@ Steps to execute
 
 ## Create a large file
 The file is generated based on the file specifications in the instructions. Only three types are allowed: strings, integers and dates. The dates are formatted as YYYYMMDD (8 characters).
+
+## Split in columns
+The heavy lifting is done with pandas. Datatypes are defined in the instructions.yml file.

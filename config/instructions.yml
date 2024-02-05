@@ -1,0 +1,34 @@
+file:
+  records: 15
+  fields:
+  - field:
+        name: Field01
+        type: date
+        length: 8
+  - field:
+        name: Field02
+        type: string
+        length: 10
+  - field:
+        name: Field03
+        type: string
+        length: 25
+  - field: 
+        name: Field04
+        type: integer
+        length: 10
+  - field:
+        name: Field05
+        type: date
+        length: 8
+test:
+  records: 10
+  fields:
+  - field: 
+        name: Field_x1
+        type: integer
+        length: 4
+  - field:
+        name: Field_x2
+        type: string
+        length: 100

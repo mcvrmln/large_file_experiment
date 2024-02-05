@@ -19,7 +19,7 @@ def generate_filename(name: str) -> str:
     return filename
 
 
-def generate_file(filename, number_records, fields):
+def generate_file(filename: str, number_records: int, fields: list):
     """Generate file based on the provided fields."""
 
     with open(os.path.join("./data", filename), "w") as file:
@@ -27,7 +27,7 @@ def generate_file(filename, number_records, fields):
             file.write(generate_record(fields))
 
 
-def generate_record(fields):
+def generate_record(fields: list):
     """Generate a record based on the fields provided"""
 
     text = ""
