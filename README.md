@@ -7,7 +7,8 @@ Steps to execute
 - [] Validate each record
 - [] Put it in Snowflake
 - [] Create Snowpipe
-- [] Use Snowflake API to 
+- [] Use Snowflake API to execute pipe
+- [] Users in Snowflake
 
 
 ## Create a large file
