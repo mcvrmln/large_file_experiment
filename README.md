@@ -4,12 +4,13 @@ Steps to execute
 
 - [x] Create a large fixed record lenght file (> 2 Gb)
 - [x] Process this file (split in columns)
-- [] Split file in chunks (100 - 250 Mb))
-- [] Validate each record
+- [x] create database, schema, file format and stages (Snowflake)
 - [] Put it in Snowflake
 - [] Create Snowpipe
 - [] Use Snowflake API to execute pipe
 - [] Users in Snowflake
+- [] Split file in chunks (100 - 250 Mb))
+- [] Validate each record
 
 
 ## Create a large file

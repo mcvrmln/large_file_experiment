@@ -2,7 +2,7 @@ name: large_file_experiment
 channels:
   - conda-forge
 dependencies:
-  - python=3.12
+  - python=3.11
   - pyarrow
   - pandas
   - pyyaml
