@@ -4,6 +4,7 @@ import yaml
 
 from utils import create_file
 from utils import extract
+from utils import load
 
 
 def generate_large_file(instructions: dict):
@@ -28,6 +29,15 @@ def process_large_file(instructions: dict):
         )
         df = extract.read_file(file, **file_definitions)
         extract.save_file(df, file)
+
+
+def load_data_into_snowflake():
+    """Function to load the data into snowflake"""
+
+    files = extract.get_filenames("./data", ".parquet")
+    # cursor = load.create_cursor(user, password, account)
+
+    # load.load_files_in_stage(cursor,)
 
 
 def run_app():

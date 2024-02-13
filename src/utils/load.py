@@ -13,7 +13,11 @@ def create_cursor(user: str, password: str, account: str):
     return connection.cursor()
 
 
-def load_files_in_stage(files: list, database: str, schema: str, stage: str):
-    """Loads a list of files (parquet files) into the stage"""
+def load_files_in_stage(cursor, files: list, database: str, schema: str, stage: str):
+    """Loads a list of files (parquet files) into the internal named stage"""
 
-    pass
+    for file in files:
+        sql = f"put file://{file}* @{database}.{schema}.{stage} overwrite=TRUE;"
+        result = cursor.execute(sql)
+        print("File is uploaded")
+        print(result.is_file_transfer, result.sqlstate, result.sfqid)

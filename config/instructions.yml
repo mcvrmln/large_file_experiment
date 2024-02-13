@@ -1,5 +1,9 @@
 file:
   records: 15
+  database: gewurztraminer
+  schema: bronze
+  stage: landing_zone
+  table: tbd
   fields:
   - field:
         name: Field01
@@ -23,6 +27,10 @@ file:
         length: 8
 test:
   records: 10
+  database: gewurztraminer
+  schema: bronze
+  stage: landing_zone
+  table: tbd
   fields:
   - field: 
         name: Field_x1

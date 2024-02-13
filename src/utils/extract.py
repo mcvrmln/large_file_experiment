@@ -73,5 +73,6 @@ def read_file(
 
 def save_file(df: pd.DataFrame, filename: str):
     """Save the pandas dataframe to file"""
-    filename = filename.replace(".txt", ".csv")
-    df.to_csv(filename, encoding="utf-8", header=True, index=False)
+
+    filename = filename.replace(".txt", ".parquet")
+    df.to_parquet(filename, index=False)

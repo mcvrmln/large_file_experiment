@@ -6,6 +6,8 @@ dependencies:
   - pyarrow
   - pandas
   - pyyaml
+  - snowflake-snowpark-python
   - pip
   - pip:
     - "snowflake-connector-python[secure-local-storage,pandas]"
+    - snowflake
