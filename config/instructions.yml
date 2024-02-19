@@ -27,7 +27,7 @@ file:
         length: 8
 test:
   records: 10
-  database: gewurztraminer
+  database: pinot_noir
   schema: bronze
   stage: landing_zone
   table: tbd
