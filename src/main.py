@@ -49,7 +49,7 @@ def run_app():
     with open("./config/config.yml", "r") as file:
         config = yaml.safe_load(file)
 
-    # generate_large_file(instructions)
+    generate_large_file(instructions)
     process_large_file(instructions)
     load_data_into_snowflake(config["admin"], instructions)
 

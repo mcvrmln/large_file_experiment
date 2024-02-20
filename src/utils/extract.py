@@ -68,6 +68,7 @@ def read_file(
     for column in date_columns:
         df[column] = pd.to_datetime(df[column], format="%Y%m%d")
 
+    print(df.info())
     return df
 
 

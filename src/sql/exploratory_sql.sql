@@ -3,13 +3,13 @@
 select count($1) from @GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240205T18341707154467_test.parquet;
 
 
---create table gewurztraminer.bronze.example_table as
-select $1:Field01::datetime,
-    $1:Field02::varchar,
-    $1:Field03::varchar,
-    $1:Field04::integer,
-    $1:Field05::datetime
-from @GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240204T22441707083088_file.parquet;
+create table gewurztraminer.bronze.example_table as
+select $1:Field01::varchar::date as Field01,
+    $1:Field02::varchar as Field02,
+    $1:Field03::varchar as Field03,
+    $1:Field04::integer as Field04,
+    $1:Field05::varchar::date as Field05
+from @GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240220T21201708460426_file.parquet;
 
 describe table gewurztraminer.bronze.example_table;
 select * from gewurztraminer.bronze.example_table;
@@ -34,3 +34,59 @@ CREATE TABLE example_table
           FILE_FORMAT=>'parquetfile'
         )
       ));
+
+
+
+
+SELECT GENERATE_COLUMN_DESCRIPTION(ARRAY_AGG(OBJECT_CONSTRUCT(*)), 'table') AS COLUMNS
+  FROM TABLE (
+    INFER_SCHEMA(
+      LOCATION=>'@GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240220T21201708460426_file.parquet',
+      FILE_FORMAT=>'parquetfile'
+    )
+  );
+
+  create or replace table gewurztraminer.bronze.example_table2
+  (
+    "Field01" NUMBER(38, 0),
+"Field02" TEXT,
+"Field03" TEXT,
+"Field04" NUMBER(38, 0),
+"Field05" NUMBER(38, 0)
+  );
+
+use database gewurztraminer;
+use schema bronze;
+  copy into gewurztraminer.bronze.example_table4
+  from @gewurztraminer.bronze.landing_zone
+  MATCH_BY_COLUMN_NAME='CASE_INSENSITIVE';
+
+  select field01::varchar::date as date_field01, count(*) as number_dates 
+  from example_table4
+  group by all
+  order by number_dates desc;
+  
+  list @gewurztraminer.bronze.landing_zone;
+  remove @gewurztraminer.bronze.landing_zone;
+  select * from gewurztraminer.bronze.example_table4;
+
+
+create or replace table gewurztraminer.bronze.example_table3
+  (
+    Field01 variant,
+    Field02 variant,
+    Field03 variant,
+    Field04 variant,
+    Field05 variant
+  );
+
+
+create or replace table gewurztraminer.bronze.example_table4
+  (
+    Field01 variant,
+    Field02 variant,
+    Field03 variant,
+    FieldAA variant, 
+    Field04 variant,
+    Field05 variant
+  );

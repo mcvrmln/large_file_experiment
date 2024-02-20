@@ -41,3 +41,4 @@ trim_space = True;
 -- https://docs.snowflake.com/en/sql-reference/sql/create-stage
 create or replace stage landing_zone
 file_format = parquetfile;
+
