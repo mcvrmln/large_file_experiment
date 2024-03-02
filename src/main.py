@@ -38,6 +38,7 @@ def load_data_into_snowflake(config: dict, instructions: dict):
     cursor = load.create_cursor(config["user"], config["password"], config["account"])
 
     load.load_files_in_stage(cursor, files, instructions)
+    load.copy_data_into_table(cursor, files, instructions)
 
 
 def run_app():

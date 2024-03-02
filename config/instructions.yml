@@ -1,9 +1,9 @@
 file:
-  records: 15
+  records: 5000
   database: gewurztraminer
   schema: bronze
   stage: landing_zone
-  table: tbd
+  table: levure
   fields:
   - field:
         name: Field01
@@ -26,11 +26,11 @@ file:
         type: date
         length: 8
 test:
-  records: 10
+  records: 1000
   database: pinot_noir
   schema: bronze
   stage: landing_zone
-  table: tbd
+  table: bouchon
   fields:
   - field: 
         name: Field_x1

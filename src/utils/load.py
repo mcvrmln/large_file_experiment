@@ -17,12 +17,26 @@ def load_files_in_stage(cursor, files: list, instructions: dict):
     """Loads a list of files (parquet files) into the internal named stage"""
 
     for file in files:
-        database, schema, stage = determine_target(file, instructions)
+        database, schema, stage, table = determine_target(file, instructions)
         print(f"{database=} --> {schema =} --> {stage =}")
-        sql = f"put file://{file} @{database}.{schema}.{stage} overwrite=TRUE;"
+        sql = f"put file://{file} @{database}.{schema}.{stage} overwrite=FALSE;"
         result = cursor.execute(sql)
         print("File is uploaded")
         print(result.is_file_transfer, result.sqlstate, result.sfqid)
+
+
+def copy_data_into_table(cursor, files: list, instructions: dict):
+    """Copy data into table"""
+
+    for file in files:
+        database, schema, stage, table = determine_target(file, instructions)
+        sql = f"use database {database};"
+        cursor.execute(sql)
+        sql = f"use schema {schema};"
+        cursor.execute(sql)
+        sql = f"copy into {database}.{schema}.{table} from @{database}.{schema}.{stage} MATCH_BY_COLUMN_NAME='CASE_INSENSITIVE';"
+        result = cursor.execute(sql)
+        print(result.sqlstate)
 
 
 def determine_target(file_name: str, instructions: dict) -> tuple:
@@ -33,5 +47,6 @@ def determine_target(file_name: str, instructions: dict) -> tuple:
             database = instructions[key]["database"]
             schema = instructions[key]["schema"]
             stage = instructions[key]["stage"]
+            table = instructions[key]["table"]
 
-    return database, schema, stage
+    return database, schema, stage, table

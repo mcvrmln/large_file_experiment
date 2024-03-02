@@ -2,7 +2,7 @@
 
 select count($1) from @GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240205T18341707154467_test.parquet;
 
-
+truncate gewurztraminer.bronze.example_table;
 create table gewurztraminer.bronze.example_table as
 select $1:Field01::varchar::date as Field01,
     $1:Field02::varchar as Field02,
@@ -11,8 +11,24 @@ select $1:Field01::varchar::date as Field01,
     $1:Field05::varchar::date as Field05
 from @GEWURZTRAMINER.BRONZE.LANDING_ZONE/20240220T21201708460426_file.parquet;
 
+copy into gewurztraminer.bronze.example_table
+from (
+    select $1:Field01::varchar::date,
+        $1:Field02::varchar,
+        $1:Field03::varchar,
+        $1:Field04::integer,
+        $1:Field05::varchar::date
+    from @GEWURZTRAMINER.BRONZE.LANDING_ZONE
+);
+
+
 describe table gewurztraminer.bronze.example_table;
-select * from gewurztraminer.bronze.example_table;
+select 
+    field05 - field01 as difference_in_dates,
+    count(*) as number_observations
+from gewurztraminer.bronze.example_table
+group by all
+order by number_observations desc;
 
 
 drop table gewurztraminer.bronze.example_table;
@@ -90,3 +106,8 @@ create or replace table gewurztraminer.bronze.example_table4
     Field04 variant,
     Field05 variant
   );
+
+
+select count(*)
+from gewurztraminer.bronze.levure
+limit 1000;

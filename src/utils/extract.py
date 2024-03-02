@@ -2,6 +2,7 @@
 
 import os
 import pandas as pd
+from datetime import datetime
 
 
 def get_filenames(folder: str, file_type: str) -> list:
@@ -68,7 +69,8 @@ def read_file(
     for column in date_columns:
         df[column] = pd.to_datetime(df[column], format="%Y%m%d")
 
-    print(df.info())
+    df["source"] = filename
+    df["create_dts"] = datetime.now()
     return df
 
 
