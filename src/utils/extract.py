@@ -68,6 +68,7 @@ def read_file(
     df = pd.read_fwf(filename, widths=widths, names=column_names, dtype=column_types)
     for column in date_columns:
         df[column] = pd.to_datetime(df[column], format="%Y%m%d")
+        df[column] = df[column].dt.tz_localize("UTC")
 
     df["source"] = filename
     df["create_dts"] = datetime.now()

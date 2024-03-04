@@ -1,10 +1,56 @@
 """" Functions for loading the data into Snowflake """
 
+import pandas as pd
 import snowflake.connector
+from snowflake.connector.pandas_tools import write_pandas
+
+
+def create_connection(user: str, password: str, account: str):
+    """Creates a Snowflake connection"""
+
+    return snowflake.connector.connect(user=user, password=password, account=account)
+
+
+def save_dataframe(connection, dataframe, table, database, schema):
+    """
+    Save a dataframe directly into Snowflake
+
+    More information: https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-api#write_pandas
+    """
+    # connection.cursor().execute(f"USE DATABASE {database};")
+    # connection.cursor().execute(f"USE SCHEMA {schema};")
+
+    return write_pandas(
+        conn=connection,
+        df=dataframe,
+        table_name=table,
+        database=database,
+        schema=schema,
+        quote_identifiers=False,
+    )
+
+
+def load_dataframes_into_tables(connection, files, instructions):
+    """Iterate over files"""
+
+    for file in files:
+        database, schema, stage, table = determine_target(file, instructions)
+        df = pd.read_parquet(file)
+        print(file)
+        print(df.info())
+        print(df.head(5))
+        result = save_dataframe(
+            connection=connection,
+            dataframe=df,
+            database=database,
+            schema=schema,
+            table=table,
+        )
+        print(result)
 
 
 def create_cursor(user: str, password: str, account: str):
-    """Creates a Snowflake connection"""
+    """Creates a Snowflake cursor"""
 
     connection = snowflake.connector.connect(
         user=user, password=password, account=account

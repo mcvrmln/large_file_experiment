@@ -111,3 +111,13 @@ create or replace table gewurztraminer.bronze.example_table4
 select count(*)
 from gewurztraminer.bronze.levure
 limit 1000;
+
+select max(id)
+from gewurztraminer.bronze.levure
+limit 1000;
+
+-- 67503
+select *
+from gewurztraminer.bronze.levure
+where id > 110000
+limit 1000;

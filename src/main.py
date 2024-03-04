@@ -35,10 +35,17 @@ def load_data_into_snowflake(config: dict, instructions: dict):
     """Function to load the data into snowflake"""
 
     files = extract.get_filenames("./data", ".parquet")
-    cursor = load.create_cursor(config["user"], config["password"], config["account"])
 
-    load.load_files_in_stage(cursor, files, instructions)
-    load.copy_data_into_table(cursor, files, instructions)
+    # Upload files to stage and copy them into a table
+    # cursor = load.create_cursor(config["user"], config["password"], config["account"])
+    # load.load_files_in_stage(cursor, files, instructions)
+    # load.copy_data_into_table(cursor, files, instructions)
+
+    # Reads the files save the data directly into snowflake with pandas_tools
+    connection = load.create_connection(
+        config["user"], config["password"], config["account"]
+    )
+    load.load_dataframes_into_tables(connection, files, instructions)
 
 
 def run_app():
