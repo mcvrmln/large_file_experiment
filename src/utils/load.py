@@ -27,6 +27,7 @@ def save_dataframe(connection, dataframe, table, database, schema):
         database=database,
         schema=schema,
         quote_identifiers=False,
+        use_logical_type=True,
     )
 
 
