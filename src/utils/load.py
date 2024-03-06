@@ -3,12 +3,15 @@
 import pandas as pd
 import snowflake.connector
 from snowflake.connector.pandas_tools import write_pandas
+import datetime
 
 
-def create_connection(user: str, password: str, account: str):
+def create_connection(user: str, password: str, account: str, warehouse: str):
     """Creates a Snowflake connection"""
 
-    return snowflake.connector.connect(user=user, password=password, account=account)
+    return snowflake.connector.connect(
+        user=user, password=password, account=account, warehouse=warehouse
+    )
 
 
 def save_dataframe(connection, dataframe, table, database, schema):
@@ -37,9 +40,11 @@ def load_dataframes_into_tables(connection, files, instructions):
     for file in files:
         database, schema, stage, table = determine_target(file, instructions)
         df = pd.read_parquet(file)
+        print(
+            f"Write panda to Snowflake: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}"
+        )
         print(file)
         print(df.info())
-        print(df.head(5))
         result = save_dataframe(
             connection=connection,
             dataframe=df,

@@ -1,6 +1,7 @@
 """ The main body of this experiment """
 
 import yaml
+import datetime
 
 from utils import create_file
 from utils import extract
@@ -43,7 +44,7 @@ def load_data_into_snowflake(config: dict, instructions: dict):
 
     # Reads the files save the data directly into snowflake with pandas_tools
     connection = load.create_connection(
-        config["user"], config["password"], config["account"]
+        config["user"], config["password"], config["account"], config["warehouse"]
     )
     load.load_dataframes_into_tables(connection, files, instructions)
 
@@ -56,10 +57,17 @@ def run_app():
 
     with open("./config/config.yml", "r") as file:
         config = yaml.safe_load(file)
-
+    print(f"Generate files: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}")
     generate_large_file(instructions)
+    print(
+        f"Process large files: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}"
+    )
     process_large_file(instructions)
+    print(
+        f"Load data to Snowflake: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}"
+    )
     load_data_into_snowflake(config["admin"], instructions)
+    print(f"The end: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 file:
-  records: 5000
+  records: 5_000
   database: gewurztraminer
   schema: bronze
   stage: landing_zone
@@ -26,7 +26,7 @@ file:
         type: date
         length: 8
 test:
-  records: 1000
+  records: 1_000
   database: pinot_noir
   schema: bronze
   stage: landing_zone

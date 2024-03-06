@@ -117,7 +117,24 @@ from gewurztraminer.bronze.levure
 limit 1000;
 
 -- 67503
-select *
+select 
+    field01,
+    field05,
+    datediff(day, field01 , field05) difference
 from gewurztraminer.bronze.levure
-where id > 150000
+where source like '%20240306T20411709754110_file.%'
+    and datediff(day, field01 , field05) between -100 and 100
+order by field01 desc
 limit 1000;
+
+
+select
+    extract(year from field05) as field05_year
+    , count(*) as number_year
+from gewurztraminer.bronze.levure
+where source = './data/20240305T22391709674757_file.txt'
+group by field05_year
+order by field05_year
+;
+
+describe table gewurztraminer.bronze.levure;
