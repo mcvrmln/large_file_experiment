@@ -44,9 +44,7 @@ create or replace table gewurztraminer.bronze.levure (
 
 create pipe cuve 
     as 
-    copy into levure 
-    from @gewurztraminer.bronze.landing_zone
-    MATCH_BY_COLUMN_NAME='CASE_INSENSITIVE';
+    Voor 
 
 --
 

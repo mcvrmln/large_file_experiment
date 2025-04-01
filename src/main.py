@@ -1,4 +1,4 @@
-""" The main body of this experiment """
+"""The main body of this experiment"""
 
 import yaml
 import datetime
@@ -66,8 +66,8 @@ def run_app():
     print(
         f"Load data to Snowflake: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}"
     )
-    load_data_into_snowflake(config["admin"], instructions)
-    print(f"The end: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}")
+    # load_data_into_snowflake(config["admin"], instructions)
+    # print(f"The end: {datetime.datetime.now().strftime('%Y-%m%d %H:%M:%S.%f')}")
 
 
 if __name__ == "__main__":

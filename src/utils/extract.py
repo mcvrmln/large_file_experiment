@@ -1,4 +1,4 @@
-""" Extract the data out of the file """
+"""Extract the data out of the file"""
 
 import os
 import pandas as pd
@@ -70,12 +70,13 @@ def read_file(
         df[column] = pd.to_datetime(df[column], format="%Y%m%d")
 
     df["source"] = filename
-    df["create_dts"] = datetime.now()
+    df["created_at"] = datetime.now()
+    df["updated_at"] = datetime.now()
     return df
 
 
 def save_file(df: pd.DataFrame, filename: str):
     """Save the pandas dataframe to file"""
 
-    filename = filename.replace(".txt", ".parquet")
-    df.to_parquet(filename, index=False)
+    filename = filename.replace(".txt", ".csv")
+    df.to_csv(filename, sep=";", index=False)

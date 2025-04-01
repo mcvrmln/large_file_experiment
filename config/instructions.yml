@@ -25,6 +25,10 @@ file:
         name: Field05
         type: date
         length: 8
+  - field:
+        name: Field06
+        type: string
+        length: 4
 test:
   records: 1_000
   database: pinot_noir
